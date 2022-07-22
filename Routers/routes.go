@@ -12,15 +12,15 @@ import (
 	"time"
 )
 
-func getPort() string {
+func GetPort() string {
 	port := os.Getenv("PORT")
 	if port != "" {
 		return ":" + port
 	}
-	return ":3000"
+	return ":57992"
 }
 func Start() {
-	p := getPort()
+	p := GetPort()
 	router := mux.NewRouter()
 	session := Controllers.NewController(GetSession())
 	router.HandleFunc("/users", session.GetUsers).Methods(http.MethodGet)
