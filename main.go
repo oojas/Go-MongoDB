@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"GoMongo/Routers"
+	"github.com/joho/godotenv"
+)
 
 func main() {
-	fmt.Println("Hello World")
+	godotenv.Load()
+	Routers.Start()
 }
