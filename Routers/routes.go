@@ -25,6 +25,7 @@ func Start() {
 	session := Controllers.NewController(GetSession())
 	router.HandleFunc("/users", session.GetUsers).Methods(http.MethodGet)
 	router.HandleFunc("/create-user", session.CreateUsers).Methods(http.MethodPost)
+	router.HandleFunc("/delete-user/{id}", session.DeleteUser).Methods(http.MethodDelete)
 	log.Fatal(http.ListenAndServe(p, router))
 }
 
