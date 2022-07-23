@@ -6,9 +6,6 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		return
-	}
+	godotenv.Load()
 	Routers.Start()
 }
