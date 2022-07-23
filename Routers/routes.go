@@ -30,10 +30,18 @@ func Start() {
 }
 
 // Connection with MongoDB
+func GetDatabase() string {
+	db := os.Getenv("DATABASE")
+	if db != "" {
+		return db
+	}
+	return "mongodb+srv://ojas:iamastarboy13@engineeringguide.h2qbook.mongodb.net/?retryWrites=true&w=majority"
+}
+
 func GetSession() *mongo.Client {
 	serverAPIOptions := options.ServerAPI(options.ServerAPIVersion1)
 	clientOptions := options.Client().
-		ApplyURI("mongodb+srv://ojas:iamastarboy13@engineeringguide.h2qbook.mongodb.net/?retryWrites=true&w=majority").
+		ApplyURI(GetDatabase()).
 		SetServerAPIOptions(serverAPIOptions)
 	ctx, cancel := context.WithTimeout(context.Background(), 35*time.Second)
 	defer cancel()
