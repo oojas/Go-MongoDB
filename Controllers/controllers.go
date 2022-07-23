@@ -21,7 +21,7 @@ func NewController(client *mongo.Client) *UserController {
 	return &UserController{client}
 }
 func (uc UserController) GetUsers(w http.ResponseWriter, r *http.Request) {
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, _ := context.WithTimeout(context.Background(), 35*time.Second)
 	cursor, _ := uc.session.Database("UsersDatabase").Collection("users").Find(ctx, bson.M{})
 	var userData []Modals.User
 	if err := cursor.All(ctx, &userData); err != nil {
