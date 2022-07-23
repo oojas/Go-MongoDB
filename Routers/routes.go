@@ -35,7 +35,7 @@ func GetSession() *mongo.Client {
 	clientOptions := options.Client().
 		ApplyURI("mongodb+srv://ojas:iamastarboy13@engineeringguide.h2qbook.mongodb.net/?retryWrites=true&w=majority").
 		SetServerAPIOptions(serverAPIOptions)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 35*time.Second)
 	defer cancel()
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
