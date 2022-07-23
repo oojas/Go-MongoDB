@@ -4,7 +4,6 @@ import (
 	"GoMongo/Modals"
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -39,10 +38,10 @@ func (uc UserController) CreateUsers(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(user)
 }
 func (uc UserController) DeleteUser(w http.ResponseWriter, r *http.Request) {
-	id := bson.ObjectIdHex(mux.Vars(r)["id"])
-	if err, _ := uc.session.Database("UserDatabase").Collection("users").DeleteOne(context.TODO(), id); err != nil {
-		w.WriteHeader(404)
-	}
+	params := mux.Vars(r)
+	id, _ := primitive.ObjectIDFromHex(params["id"])
+	//opts := options.Delete().SetHint(id)
+	uc.session.Database("UserDatabase").Collection("users").DeleteOne(context.TODO(), bson.M{"_id": id})
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprint(w, "Deleted User ", id, " ")
+	json.NewEncoder(w).Encode("Empployee Deleted")
 }
